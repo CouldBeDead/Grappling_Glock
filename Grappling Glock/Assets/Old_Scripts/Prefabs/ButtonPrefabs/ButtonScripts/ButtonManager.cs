@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
+    //get the menu canvas data 
+    public GameObject menuDropDown; 
+    public GameObject menuButton;
+
    //start buttons logic -- starts game 
    public void StartGame()
     {   
@@ -22,5 +26,29 @@ public class ButtonManager : MonoBehaviour
     {
         Debug.Log("Load Intr0 - go to intro scene");
         SceneManager.LoadScene("IntroScene");
+    }
+
+
+    //menu Button logic -- opens the menu dropdown Canvas
+    public void OpenMenuCanvasDropDown()
+    {
+        Debug.Log("Open Menu Dropdown");
+        menuDropDown.SetActive(true);
+        menuButton.SetActive(false);
+    }
+
+    //Closes the menu dropdown Canvas
+    public void CloseMenuCanvasDropDown()
+    {
+        Debug.Log("Close Menu Dropdown");
+        menuDropDown.SetActive(false);
+        menuButton.SetActive(true);
+    }
+
+    //Level button logic -- opens level scene 
+    public void LoadLevels()
+    {
+        Debug.Log("Load Levels - go to level scene");
+        SceneManager.LoadScene("LevelScene");
     }
 }

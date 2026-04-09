@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 9104328284450210798}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 640, y: 0.00001, z: 1.4189895e+10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c60dc1c3f1ad0488f9fc2fbf45f892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonManager
+  menuDropDown: {fileID: 1189360234981315928, guid: 9882e4ad618fa9844a17b34a38750fad, type: 3}
+  menuButton: {fileID: 7812118462171981921, guid: 55ccab97921fa4741ab9dfd380fcd082, type: 3}
