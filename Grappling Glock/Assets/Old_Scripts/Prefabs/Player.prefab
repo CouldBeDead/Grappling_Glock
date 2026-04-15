@@ -163,6 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 0}
   orientation: {fileID: 8828175311100111216}
+  sensitivity: 50
+  sensMultiplier: 1
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
