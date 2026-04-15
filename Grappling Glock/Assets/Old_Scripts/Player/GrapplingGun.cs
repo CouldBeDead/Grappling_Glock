@@ -1,61 +1,83 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GrapplingGun : MonoBehaviour {
+public class GrapplingGun : MonoBehaviour
+{
     private PlayerMovement playerMovement;
     private LineRenderer lr;
     private Vector3 grapplePoint;
+
     public LayerMask whatIsGrappleable;
     public LayerMask whatIsRed;
     public Transform gunTip, playerCamera, player;
-    private float maxDistance = 100f;
+
+    [SerializeField] private float maxDistance = 100f;
     private SpringJoint joint;
 
     private bool isGrappling = false;
     private Vector3 currentGrapplePosition;
 
-    void Start() {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-    }
-
-    void Awake() {
+    void Awake()
+    {
         lr = GetComponent<LineRenderer>();
     }
 
-    void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+    void Start()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
+
+    void Update()
+    {
+        Mouse mouse = Mouse.current;
+        if (mouse == null)
+            return;
+
+        if (mouse.leftButton.wasPressedThisFrame)
+        {
             StartGrapple();
-        } else if (Input.GetMouseButtonUp(0)) {
+        }
+        else if (mouse.leftButton.wasReleasedThisFrame)
+        {
             StopGrapple();
         }
     }
 
-    void LateUpdate() {
-        if (isGrappling) {
+    void LateUpdate()
+    {
+        if (isGrappling)
+        {
             UpdateGrapple();
             CheckGrappleEnd();
         }
     }
 
-    void enemyGrapple() {
-        if (playerMovement != null && playerMovement.grounded) {
+    void EnemyGrapple()
+    {
+        if (playerMovement != null && playerMovement.grounded)
+        {
             isGrappling = false;
             return;
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed)) {
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
+        {
             grapplePoint = hit.point;
             isGrappling = true;
 
-            if (player.GetComponent<SpringJoint>()) {
-                Destroy(player.GetComponent<SpringJoint>());
+            SpringJoint existingJoint = player.GetComponent<SpringJoint>();
+            if (existingJoint != null)
+            {
+                Destroy(existingJoint);
             }
 
             Vector3 direction = (grapplePoint - player.position).normalized;
             float grappleSpeed = 75f;
             Rigidbody rb = player.GetComponent<Rigidbody>();
 
-            if (rb != null) {
+            if (rb != null)
+            {
                 rb.linearVelocity = direction * grappleSpeed;
             }
 
@@ -64,9 +86,11 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-    void groundGrapple() {
+    void GroundGrapple()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable)) {
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
+        {
             grapplePoint = hit.point;
             isGrappling = true;
 
@@ -87,37 +111,50 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-    void StartGrapple() {
+    void StartGrapple()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed)) {
-            enemyGrapple();
-        } else if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable)) {
-            groundGrapple();
+
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
+        {
+            EnemyGrapple();
+        }
+        else if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
+        {
+            GroundGrapple();
         }
     }
 
-    void UpdateGrapple() {
-        if (!isGrappling) return;
+    void UpdateGrapple()
+    {
+        if (!isGrappling)
+            return;
 
-        if (lr.positionCount > 0) {
+        if (lr.positionCount > 0)
+        {
             currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
             lr.SetPosition(0, gunTip.position);
             lr.SetPosition(1, currentGrapplePosition);
         }
 
-        if (Vector3.Distance(player.position, grapplePoint) < 2f) {
+        if (Vector3.Distance(player.position, grapplePoint) < 2f)
+        {
             StopGrapple();
         }
     }
 
-    void CheckGrappleEnd() {
+    void CheckGrappleEnd()
+    {
         float distance = Vector3.Distance(player.position, grapplePoint);
 
-        if (distance < 2f) {
+        if (distance < 2f)
+        {
             Collider[] hits = Physics.OverlapSphere(grapplePoint, 1f, whatIsRed);
-            foreach (Collider hit in hits) {
+            foreach (Collider hit in hits)
+            {
                 EnemyVisionAndTracking enemy = hit.GetComponentInParent<EnemyVisionAndTracking>();
-                if (enemy != null) {
+                if (enemy != null)
+                {
                     enemy.Die(transform.position);
                 }
             }
@@ -126,27 +163,34 @@ public class GrapplingGun : MonoBehaviour {
         }
     }
 
-    void LaunchPlayer() {
+    void LaunchPlayer()
+    {
         lr.positionCount = 0;
 
         Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (rb != null) {
-            Vector3 launchForce = new Vector3(5f, 20f, 0);
+        if (rb != null)
+        {
+            Vector3 launchForce = new Vector3(5f, 20f, 0f);
             rb.linearVelocity = launchForce;
         }
     }
 
-    void StopGrapple() {
+    void StopGrapple()
+    {
         isGrappling = false;
         lr.positionCount = 0;
 
-        if (joint != null) {
+        if (joint != null)
+        {
             Destroy(joint);
+            joint = null;
         }
     }
 
-    void DrawRope() {
-        if (!joint) return;
+    void DrawRope()
+    {
+        if (joint == null)
+            return;
 
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 2f);
 
@@ -154,11 +198,13 @@ public class GrapplingGun : MonoBehaviour {
         lr.SetPosition(1, currentGrapplePosition);
     }
 
-    public bool IsGrappling() {
+    public bool IsGrappling()
+    {
         return joint != null;
     }
 
-    public Vector3 GetGrapplePoint() {
+    public Vector3 GetGrapplePoint()
+    {
         return grapplePoint;
     }
 }
