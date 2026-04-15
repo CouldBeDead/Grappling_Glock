@@ -47,15 +47,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3318962996579448629, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3918868857475198823, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4215867973221436750, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5153590797059518857, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5322400275170306845, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_LocalScale.x
@@ -111,11 +115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5746488653583167871, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6057500874782376001, guid: 673c32520014fcb47bd55627ef91d1bf, type: 3}
       propertyPath: m_VersionIndex
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -137,7 +141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2660050009401300465, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
       propertyPath: m_VersionIndex
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7669017332099477777, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
       propertyPath: m_Name
@@ -197,15 +201,73 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8576056548967482209, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
       propertyPath: m_VersionIndex
-      value: 11
+      value: 14
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1272619014010093678, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7669017332099477777, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 307109037925135855}
   m_SourcePrefab: {fileID: 100100000, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
 --- !u!4 &682710883502978488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8082866378449219699, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
   m_PrefabInstance: {fileID: 8743006174583260619}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1385058554415641818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7669017332099477777, guid: 87e3f348b6a853d45bd98e34d2aa9e44, type: 3}
+  m_PrefabInstance: {fileID: 8743006174583260619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &307109037925135855
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385058554415641818}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
