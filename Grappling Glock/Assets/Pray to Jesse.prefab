@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4022398672423082444}
   - component: {fileID: 3569514197575718582}
-  - component: {fileID: 230286393948734546}
   m_Layer: 9
   m_Name: Pray to Jesse
   m_TagString: Untagged
@@ -47,25 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowTimeScale: 0.2
   slowPitch: 0.6
-  slowKey: 304
-  postProcessVolume: {fileID: 0}
-  vignetteFadeSpeed: 2
-  maxVignetteIntensity: 0.4
---- !u!114 &230286393948734546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3444721512871059288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db8bd516b22406348a89d09aa567d828, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowTimeScale: 0.2
-  slowPitch: 0.6
-  slowKey: 304
   postProcessVolume: {fileID: 0}
   vignetteFadeSpeed: 2
   maxVignetteIntensity: 0.4

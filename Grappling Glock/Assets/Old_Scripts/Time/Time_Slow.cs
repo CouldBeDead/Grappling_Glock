@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class TimeSlow : MonoBehaviour
 {
     [Header("Time Settings")]
     public float slowTimeScale = 0.2f;
     public float slowPitch = 0.6f;
-    public KeyCode slowKey = KeyCode.LeftShift;
 
     [Header("Vignette Settings")]
     public PostProcessVolume postProcessVolume;
@@ -20,23 +19,18 @@ public class TimeSlow : MonoBehaviour
     private bool isTimeSlowed = false;
     private float currentTargetPitch = 1f;
 
-    private PlayerMovement playerMovement;
-
-    // Public getter so other scripts can read pitch if needed
     public float CurrentTargetPitch => currentTargetPitch;
 
-
     void Awake()
-{
-    // Force reset time BEFORE any physics or game logic runs
-    Time.timeScale = 1f;
-    Time.fixedDeltaTime = 0.02f; // Unity's default fixedDeltaTime
-}
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+    }
 
     void Start()
     {
         originalFixedDeltaTime = Time.fixedDeltaTime;
-        
+
         isTimeSlowed = false;
         currentTargetPitch = 1f;
 
@@ -49,34 +43,39 @@ public class TimeSlow : MonoBehaviour
             Debug.LogWarning("Vignette not found on assigned Post Process Volume.");
         }
 
-        UpdateAllAudioPitches(); // Reset audio pitch just in case
+        UpdateAllAudioPitches();
     }
 
     void Update()
     {
-        // Toggle time slow
-        if (Input.GetKeyDown(slowKey))
+        Keyboard kb = Keyboard.current;
+        if (kb == null)
+            return;
+
+        if (kb.leftShiftKey.wasPressedThisFrame || kb.rightShiftKey.wasPressedThisFrame)
         {
             Time.timeScale = slowTimeScale;
             Time.fixedDeltaTime = originalFixedDeltaTime * slowTimeScale;
             isTimeSlowed = true;
         }
-        else if (Input.GetKeyUp(slowKey))
+        else if (kb.leftShiftKey.wasReleasedThisFrame || kb.rightShiftKey.wasReleasedThisFrame)
         {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = originalFixedDeltaTime;
             isTimeSlowed = false;
         }
 
-        // Update pitch globally
         currentTargetPitch = isTimeSlowed ? slowPitch : 1f;
         UpdateAllAudioPitches();
 
-        // Vignette animation
         if (vignette != null)
         {
             float target = isTimeSlowed ? maxVignetteIntensity : 0f;
-            vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, target, Time.unscaledDeltaTime * vignetteFadeSpeed);
+            vignette.intensity.value = Mathf.Lerp(
+                vignette.intensity.value,
+                target,
+                Time.unscaledDeltaTime * vignetteFadeSpeed
+            );
         }
     }
 
@@ -98,5 +97,11 @@ public class TimeSlow : MonoBehaviour
         {
             source.pitch = currentTargetPitch;
         }
+    }
+
+    void OnDisable()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = originalFixedDeltaTime > 0f ? originalFixedDeltaTime : 0.02f;
     }
 }
