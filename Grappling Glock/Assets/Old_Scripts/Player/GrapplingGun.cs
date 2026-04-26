@@ -11,7 +11,13 @@ public class GrapplingGun : MonoBehaviour
     public LayerMask whatIsRed;
     public Transform gunTip, playerCamera, player;
 
+    [Header("Grapple Settings")]
     [SerializeField] private float maxDistance = 100f;
+
+    [Header("Aim Assist Settings")]
+    [SerializeField] private float aimAssistRadius = 1.5f;
+    [SerializeField] private float aimAssistAngle = 8f;
+
     private SpringJoint joint;
 
     private bool isGrappling = false;
@@ -52,7 +58,121 @@ public class GrapplingGun : MonoBehaviour
         }
     }
 
-    void EnemyGrapple()
+    bool TryDirectHit(LayerMask layerMask, out RaycastHit hit)
+    {
+        return Physics.Raycast(
+            playerCamera.position,
+            playerCamera.forward,
+            out hit,
+            maxDistance,
+            layerMask
+        );
+    }
+
+    bool TryAimAssistHit(LayerMask layerMask, out RaycastHit hit)
+    {
+        if (Physics.SphereCast(
+            playerCamera.position,
+            aimAssistRadius,
+            playerCamera.forward,
+            out hit,
+            maxDistance,
+            layerMask
+        ))
+        {
+            Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
+            float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
+
+            if (angleToTarget <= aimAssistAngle)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public bool TryGetAvailableGrapplePoint(out Vector3 point)
+{
+    RaycastHit hit;
+
+    // Direct enemy hit
+    if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
+    {
+        point = hit.point;
+        return true;
+    }
+
+    // Direct grappleable hit
+    if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
+    {
+        point = hit.point;
+        return true;
+    }
+
+    // Aim assist enemy hit
+    if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsRed))
+    {
+        Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
+        float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
+
+        if (angleToTarget <= aimAssistAngle)
+        {
+            point = hit.point;
+            return true;
+        }
+    }
+
+    // Aim assist grappleable hit
+    if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
+    {
+        Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
+        float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
+
+        if (angleToTarget <= aimAssistAngle)
+        {
+            point = hit.point;
+            return true;
+        }
+    }
+
+    point = Vector3.zero;
+    return false;
+}
+
+    void StartGrapple()
+    {
+        RaycastHit hit;
+
+        // Exact enemy hit gets priority
+        if (TryDirectHit(whatIsRed, out hit))
+        {
+            EnemyGrapple(hit);
+            return;
+        }
+
+        // Exact ground/grappleable hit
+        if (TryDirectHit(whatIsGrappleable, out hit))
+        {
+            GroundGrapple(hit);
+            return;
+        }
+
+        // Aim assist enemy hit
+        if (TryAimAssistHit(whatIsRed, out hit))
+        {
+            EnemyGrapple(hit);
+            return;
+        }
+
+        // Aim assist grappleable hit
+        if (TryAimAssistHit(whatIsGrappleable, out hit))
+        {
+            GroundGrapple(hit);
+            return;
+        }
+    }
+
+    void EnemyGrapple(RaycastHit hit)
     {
         if (playerMovement != null && playerMovement.grounded)
         {
@@ -60,69 +180,49 @@ public class GrapplingGun : MonoBehaviour
             return;
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
+        grapplePoint = hit.point;
+        isGrappling = true;
+
+        SpringJoint existingJoint = player.GetComponent<SpringJoint>();
+        if (existingJoint != null)
         {
-            grapplePoint = hit.point;
-            isGrappling = true;
-
-            SpringJoint existingJoint = player.GetComponent<SpringJoint>();
-            if (existingJoint != null)
-            {
-                Destroy(existingJoint);
-            }
-
-            Vector3 direction = (grapplePoint - player.position).normalized;
-            float grappleSpeed = 75f;
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.linearVelocity = direction * grappleSpeed;
-            }
-
-            lr.positionCount = 2;
-            currentGrapplePosition = gunTip.position;
+            Destroy(existingJoint);
         }
+
+        Vector3 direction = (grapplePoint - player.position).normalized;
+        float grappleSpeed = 75f;
+
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * grappleSpeed;
+        }
+
+        lr.positionCount = 2;
+        currentGrapplePosition = gunTip.position;
     }
 
-    void GroundGrapple()
+    void GroundGrapple(RaycastHit hit)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
-        {
-            grapplePoint = hit.point;
-            isGrappling = true;
+        grapplePoint = hit.point;
+        isGrappling = true;
 
-            joint = player.gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint;
+        joint = player.gameObject.AddComponent<SpringJoint>();
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = grapplePoint;
 
-            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-            joint.maxDistance = distanceFromPoint * 0.3f;
-            joint.minDistance = distanceFromPoint * 0.1f;
+        float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
-            joint.spring = 4f;
-            joint.damper = 4.5f;
-            joint.massScale = 4.5f;
+        joint.maxDistance = distanceFromPoint * 0.3f;
+        joint.minDistance = distanceFromPoint * 0.1f;
 
-            lr.positionCount = 2;
-            currentGrapplePosition = gunTip.position;
-        }
-    }
+        joint.spring = 4f;
+        joint.damper = 4.5f;
+        joint.massScale = 4.5f;
 
-    void StartGrapple()
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
-        {
-            EnemyGrapple();
-        }
-        else if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
-        {
-            GroundGrapple();
-        }
+        lr.positionCount = 2;
+        currentGrapplePosition = gunTip.position;
     }
 
     void UpdateGrapple()
@@ -132,7 +232,12 @@ public class GrapplingGun : MonoBehaviour
 
         if (lr.positionCount > 0)
         {
-            currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+            currentGrapplePosition = Vector3.Lerp(
+                currentGrapplePosition,
+                grapplePoint,
+                Time.deltaTime * 8f
+            );
+
             lr.SetPosition(0, gunTip.position);
             lr.SetPosition(1, currentGrapplePosition);
         }
@@ -150,9 +255,11 @@ public class GrapplingGun : MonoBehaviour
         if (distance < 2f)
         {
             Collider[] hits = Physics.OverlapSphere(grapplePoint, 1f, whatIsRed);
+
             foreach (Collider hit in hits)
             {
                 EnemyVisionAndTracking enemy = hit.GetComponentInParent<EnemyVisionAndTracking>();
+
                 if (enemy != null)
                 {
                     enemy.Die(transform.position);
@@ -168,6 +275,7 @@ public class GrapplingGun : MonoBehaviour
         lr.positionCount = 0;
 
         Rigidbody rb = player.GetComponent<Rigidbody>();
+
         if (rb != null)
         {
             Vector3 launchForce = new Vector3(5f, 20f, 0f);
@@ -192,7 +300,11 @@ public class GrapplingGun : MonoBehaviour
         if (joint == null)
             return;
 
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 2f);
+        currentGrapplePosition = Vector3.Lerp(
+            currentGrapplePosition,
+            grapplePoint,
+            Time.deltaTime * 2f
+        );
 
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);

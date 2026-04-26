@@ -78,6 +78,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+
+        // Hard speed cap after all movement forces.
+        CapPlayerSpeed();
+
         UpdateSlideAudio();
     }
 
@@ -99,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         if (kb == null)
             return;
 
-        // WASD movement
         if (kb.aKey.isPressed) x -= 1f;
         if (kb.dKey.isPressed) x += 1f;
         if (kb.sKey.isPressed) y -= 1f;
@@ -108,11 +111,9 @@ public class PlayerMovement : MonoBehaviour
         x = Mathf.Clamp(x, -1f, 1f);
         y = Mathf.Clamp(y, -1f, 1f);
 
-        // Jump / crouch
         jumping = kb.spaceKey.isPressed;
         crouching = kb.leftCtrlKey.isPressed || kb.rightCtrlKey.isPressed;
 
-        // Crouch start / stop
         if (kb.leftCtrlKey.wasPressedThisFrame || kb.rightCtrlKey.wasPressedThisFrame)
             StartCrouch();
 
@@ -132,8 +133,13 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.magnitude > 0.5f && grounded)
         {
             Vector3 slideDirection = orientation.transform.forward;
-            float boostStrength = 25f;
+            float boostStrength = 10f;
+
             rb.AddForce(slideDirection * boostStrength, ForceMode.Impulse);
+
+            // Cap immediately after slide boost.
+            CapPlayerSpeed();
+
             grounded = false;
         }
 
@@ -143,6 +149,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopCrouch()
     {
+        Vector3 slideDirection = orientation.transform.forward;
+        float boostStrength = 10f;
+        rb.AddForce(slideDirection * boostStrength * -1f, ForceMode.Impulse);
         transform.localScale = playerScale;
         transform.position = new Vector3(
             transform.position.x,
@@ -150,8 +159,37 @@ public class PlayerMovement : MonoBehaviour
             transform.position.z
         );
 
+        // Cap again when leaving slide.
+        CapPlayerSpeed();
+        
+
+
         if (slideAudio != null)
             slideAudio.Stop();
+    }
+
+    private void CapPlayerSpeed()
+    {
+        Vector3 velocity = rb.linearVelocity;
+
+        // Only cap horizontal movement speed.
+        // This keeps jumping and falling from being limited by maxSpeed.
+        Vector3 horizontalVelocity = new Vector3(
+            velocity.x,
+            0f,
+            velocity.z
+        );
+
+        if (horizontalVelocity.magnitude > maxSpeed)
+        {
+            Vector3 cappedHorizontalVelocity = horizontalVelocity.normalized * maxSpeed;
+
+            rb.linearVelocity = new Vector3(
+                cappedHorizontalVelocity.x,
+                velocity.y,
+                cappedHorizontalVelocity.z
+            );
+        }
     }
 
     private void UpdateSlideAudio()
@@ -159,11 +197,15 @@ public class PlayerMovement : MonoBehaviour
         if (slideAudio == null)
             return;
 
-        float speed = rb.linearVelocity.magnitude;
+        float horizontalSpeed = new Vector3(
+            rb.linearVelocity.x,
+            0f,
+            rb.linearVelocity.z
+        ).magnitude;
 
-        if (crouching && grounded && speed > minSpeedForAudio)
+        if (crouching && grounded && horizontalSpeed > minSpeedForAudio)
         {
-            slideAudio.volume = Mathf.Clamp01(speed / maxSpeed) * maxSlideVolume;
+            slideAudio.volume = Mathf.Clamp01(horizontalSpeed / maxSpeed) * maxSlideVolume;
         }
         else
         {
@@ -188,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (crouching && grounded && readyToJump)
         {
-            rb.AddForce(Vector3.down * Time.deltaTime * 3000f);
+            rb.AddForce(Vector3.down * Time.deltaTime);
             return;
         }
 
@@ -223,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(normalVector * jumpForce * 0.5f);
 
             Vector3 vel = rb.linearVelocity;
+
             if (rb.linearVelocity.y < 0.5f)
                 rb.linearVelocity = new Vector3(vel.x, 0f, vel.z);
             else if (rb.linearVelocity.y > 0f)
@@ -240,6 +283,7 @@ public class PlayerMovement : MonoBehaviour
     private void Look()
     {
         Mouse mouse = Mouse.current;
+
         if (mouse == null || playerCam == null || orientation == null)
             return;
 
@@ -265,27 +309,33 @@ public class PlayerMovement : MonoBehaviour
         {
             if (rb.linearVelocity.sqrMagnitude > 0.0001f)
             {
-                rb.AddForce(moveSpeed * Time.deltaTime * -rb.linearVelocity.normalized * slideCounterMovement);
+                Vector3 horizontalVelocity = new Vector3(
+                    rb.linearVelocity.x,
+                    0f,
+                    rb.linearVelocity.z
+                );
+
+                rb.AddForce(moveSpeed * Time.deltaTime * -horizontalVelocity.normalized * slideCounterMovement);
             }
+
             return;
         }
 
-        if ((Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f) || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0))
+        if ((Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f) ||
+            (mag.x < -threshold && x > 0) ||
+            (mag.x > threshold && x < 0))
         {
             rb.AddForce(moveSpeed * orientation.transform.right * Time.deltaTime * -mag.x * counterMovement);
         }
 
-        if ((Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f) || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0))
+        if ((Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f) ||
+            (mag.y < -threshold && y > 0) ||
+            (mag.y > threshold && y < 0))
         {
             rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * -mag.y * counterMovement);
         }
 
-        if (Mathf.Sqrt((Mathf.Pow(rb.linearVelocity.x, 2f) + Mathf.Pow(rb.linearVelocity.z, 2f))) > maxSpeed)
-        {
-            float fallSpeed = rb.linearVelocity.y;
-            Vector3 n = rb.linearVelocity.normalized * maxSpeed;
-            rb.linearVelocity = new Vector3(n.x, fallSpeed, n.z);
-        }
+        CapPlayerSpeed();
     }
 
     public Vector2 FindVelRelativeToLook()
@@ -296,9 +346,14 @@ public class PlayerMovement : MonoBehaviour
         float u = Mathf.DeltaAngle(lookAngle, moveAngle);
         float v = 90f - u;
 
-        float magnitude = rb.linearVelocity.magnitude;
-        float yMag = magnitude * Mathf.Cos(u * Mathf.Deg2Rad);
-        float xMag = magnitude * Mathf.Cos(v * Mathf.Deg2Rad);
+        float horizontalMagnitude = new Vector3(
+            rb.linearVelocity.x,
+            0f,
+            rb.linearVelocity.z
+        ).magnitude;
+
+        float yMag = horizontalMagnitude * Mathf.Cos(u * Mathf.Deg2Rad);
+        float xMag = horizontalMagnitude * Mathf.Cos(v * Mathf.Deg2Rad);
 
         return new Vector2(xMag, yMag);
     }
@@ -312,6 +367,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
         int layer = other.gameObject.layer;
+
         if (whatIsGround != (whatIsGround | (1 << layer)))
             return;
 
@@ -329,6 +385,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float delay = 3f;
+
         if (!cancellingGrounded)
         {
             cancellingGrounded = true;
@@ -354,11 +411,16 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
         readyToJump = true;
 
-        desiredX = orientation.transform.eulerAngles.y;
+        if (orientation != null)
+            desiredX = orientation.transform.eulerAngles.y;
+
         xRotation = 0f;
 
-        playerCam.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
-        orientation.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
+        if (playerCam != null)
+            playerCam.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
+
+        if (orientation != null)
+            orientation.transform.localRotation = Quaternion.Euler(0f, desiredX, 0f);
 
         if (slideAudio != null)
         {

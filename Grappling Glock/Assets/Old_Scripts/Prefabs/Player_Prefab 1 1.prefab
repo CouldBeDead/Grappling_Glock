@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grappling: {fileID: 538759212697285670}
+  rotationSpeed: 10
 --- !u!1 &6302909929440507371
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -846,6 +847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 7101594822675290679}
   orientation: {fileID: 4919314151474613975}
+  sensitivity: 50
+  sensMultiplier: 1
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
@@ -1056,6 +1059,9 @@ MonoBehaviour:
   gunTip: {fileID: 7251443383944311757}
   playerCamera: {fileID: 7101594822675290679}
   player: {fileID: 394932468620548741}
+  maxDistance: 100
+  aimAssistRadius: 1.5
+  aimAssistAngle: 8
 --- !u!1 &7419471643912449325
 GameObject:
   m_ObjectHideFlags: 0
