@@ -475,6 +475,33 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &107912837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6881907605795576261, guid: 4d0f11df00a954898acb314f59db9866, type: 3}
+  m_PrefabInstance: {fileID: 124749612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &107912841
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107912837}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2762363455641309748, guid: b21338d04af03438c8213888f82aa40d, type: 3}
 --- !u!1001 &124749612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -546,7 +573,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6881907605795576261, guid: 4d0f11df00a954898acb314f59db9866, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 107912841}
   m_SourcePrefab: {fileID: 100100000, guid: 4d0f11df00a954898acb314f59db9866, type: 3}
 --- !u!1 &131702980
 GameObject:
@@ -1378,7 +1408,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 717e52dd9491caa438a6686456c370a3, type: 2}
+  - {fileID: 2100000, guid: 43873ee149f1289479cbc5d7bd37416d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2016,7 +2046,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4717b199010ca4cb3a8a7a465ec457d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4735,6 +4765,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pray to Jesse
       objectReference: {fileID: 0}
+    - target: {fileID: 3444721512871059288, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569514197575718582, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
+      propertyPath: postProcessVolume
+      value: 
+      objectReference: {fileID: 2129233368}
     - target: {fileID: 4022398672423082444, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 153.504
@@ -4778,7 +4816,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3444721512871059288, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129233368}
   m_SourcePrefab: {fileID: 100100000, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
 --- !u!43 &586776753
 Mesh:
@@ -5012,7 +5053,7 @@ PrefabInstance:
       objectReference: {fileID: 586776753}
     - target: {fileID: 4118084352361736924, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3453
+      value: 3456
       objectReference: {fileID: 0}
     - target: {fileID: 6542391328346171663, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_Name
@@ -13610,6 +13651,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 86.396576, y: 13.170327, z: 0.82797337}
   m_Center: {x: 30.396284, y: 0, z: 0}
+--- !u!1 &1183929010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3557430930200514076, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+  m_PrefabInstance: {fileID: 1784155902}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1183929016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183929010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.PostProcessVolume
+  sharedProfile: {fileID: 11400000, guid: b20ca31167799034fba7716a23543aef, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 1
 --- !u!4 &1186963324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7799168871152030556, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
@@ -19534,6 +19597,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 433764281757850661, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 433764281757850661, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.311
       objectReference: {fileID: 0}
@@ -19543,6 +19610,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 578212559522441981, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_ShowToolkit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 2129233367}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: stopNaNPropagation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313442075510274679, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_FocalLength
+      value: 15.638705
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761273707992094247, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_projectionMatrixMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791475234747988786, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
@@ -19587,11 +19702,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1998813089681085104, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557430930200514076, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4073789906466284041, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: m_Name
       value: Player + Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262121690274466805, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_CameraType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262121690274466805, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_VolumeTrigger
+      value: 
+      objectReference: {fileID: 2129233367}
+    - target: {fileID: 4262121690274466805, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262121690274466805, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_VolumeLayerMask.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 7070205088713974830, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: grounded
@@ -19624,6 +19759,10 @@ PrefabInstance:
     - target: {fileID: 7070205088713974830, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: slideCounterMovement
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574908728448543755, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7768239550572155589, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       propertyPath: m_Material
@@ -19665,7 +19804,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7799168871152030556, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 7505427482648073914}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3557430930200514076, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1183929016}
   m_SourcePrefab: {fileID: 100100000, guid: 5deec094e1459ba458b6786a57322a8d, type: 3}
 --- !u!1 &1800425983
 GameObject:
@@ -22219,7 +22361,7 @@ PrefabInstance:
       objectReference: {fileID: 1045211835}
     - target: {fileID: 4118084352361736924, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3453
+      value: 3456
       objectReference: {fileID: 0}
     - target: {fileID: 6542391328346171663, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_Name
@@ -23298,7 +23440,7 @@ PrefabInstance:
       objectReference: {fileID: 1526588082}
     - target: {fileID: 4118084352361736924, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3453
+      value: 3456
       objectReference: {fileID: 0}
     - target: {fileID: 6542391328346171663, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_Name
@@ -24760,6 +24902,33 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &2129233365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3444721512871059288, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
+  m_PrefabInstance: {fileID: 542795411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2129233367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4022398672423082444, guid: b1cb82a3d2ffd884d8934f06cbd51b38, type: 3}
+  m_PrefabInstance: {fileID: 542795411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2129233368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129233365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.PostProcessVolume
+  sharedProfile: {fileID: 11400000, guid: b20ca31167799034fba7716a23543aef, type: 2}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!43 &2133156298
 Mesh:
   m_ObjectHideFlags: 0
@@ -25023,7 +25192,7 @@ PrefabInstance:
       objectReference: {fileID: 1304200248}
     - target: {fileID: 4118084352361736924, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_VersionIndex
-      value: 3456
+      value: 3459
       objectReference: {fileID: 0}
     - target: {fileID: 5991271079418060104, guid: f2246722f15729344a339b7108b6097f, type: 3}
       propertyPath: m_fontSize
