@@ -49,7 +49,8 @@ Material:
     m_Colors:
     - _Base_Color: {r: 0.95686275, g: 0.8346577, b: 0.3865726, a: 0}
     - _HighlightColor: {r: 1, g: 0.7858338, b: 0, a: 1}
-    - _Outline_Color: {r: 0.6784314, g: 0.5803922, b: 0.2784314, a: 1}
+    - _Highlight_Color: {r: 1, g: 0.6156863, b: 0, a: 0}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Shadows_Color: {r: 0.6784314, g: 0.5803922, b: 0.2784314, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

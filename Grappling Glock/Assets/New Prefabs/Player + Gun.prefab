@@ -238,7 +238,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7bcf307e983fe4e40bca27c33b20fcd2, type: 2}
+  - {fileID: 2100000, guid: 3fce95ca2e4d0b5429c1eef51fb83f1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,11 +339,11 @@ MonoBehaviour:
     m_Bits: 65
   whatIsRed:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   gunTip: {fileID: 8822967872096858950}
   playerCamera: {fileID: 7574908728448543755}
   player: {fileID: 1009301231798493510}
-  maxDistance: 100
+  maxDistance: 50
   aimAssistRadius: 1.5
   aimAssistAngle: 8
 --- !u!1 &1691526138839887042
