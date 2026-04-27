@@ -17798,6 +17798,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2572538904152343802, guid: d5d82bbe055b2a449aee57a3f54085ef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572538904152343802, guid: d5d82bbe055b2a449aee57a3f54085ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572538904152343802, guid: d5d82bbe055b2a449aee57a3f54085ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572538904152343802, guid: d5d82bbe055b2a449aee57a3f54085ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2619210580428433869, guid: d5d82bbe055b2a449aee57a3f54085ef, type: 3}
       propertyPath: player
       value: 
