@@ -26,9 +26,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Glow_Size: 0.2
-    - _Highlight_Intensity: 1
-    - _Highlight_Size: 0.8
+    - _Glow_Size: 0
+    - _Highlight_Intensity: 2.75
+    - _Highlight_Size: 0.6
     - _Outline_Size: 0.5
     - _Shadows_Contrast: 0
     - _Shadows_Size: 0
