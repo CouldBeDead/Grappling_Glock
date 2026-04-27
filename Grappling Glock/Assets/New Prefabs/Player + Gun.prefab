@@ -336,7 +336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrapplingGun
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 64
   whatIsRed:
     serializedVersion: 2
     m_Bits: 128
