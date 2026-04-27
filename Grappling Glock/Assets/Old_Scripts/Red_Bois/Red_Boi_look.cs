@@ -268,7 +268,7 @@ private System.Collections.IEnumerator ShootBurst()
 {
     shootTimer = shootCooldown;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 1; i++)
     {
         Instantiate(bulletPrefab, barrel.position, barrel.rotation);
         yield return new WaitForSeconds(burstInterval);
