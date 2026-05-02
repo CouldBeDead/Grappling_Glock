@@ -38,10 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glow_Size: 0.15
-    - _Highlight_Intensity: 0.4
+    - _Glow_Size: 2
+    - _Highlight_Intensity: 10
     - _Highlight_Size: 0.55
-    - _Outline_Size: 0.4
+    - _Outline_Size: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Shadows_Contrast: 1
@@ -49,6 +49,7 @@ Material:
     m_Colors:
     - _Base_Color: {r: 0.98823535, g: 0.6039216, b: 0.16470589, a: 0}
     - _HighlightColor: {r: 1, g: 0.7858338, b: 0, a: 1}
+    - _Highlight_Color: {r: 1, g: 0.6156863, b: 0, a: 0}
     - _Outline_Color: {r: 0.7137255, g: 0.4431373, b: 0.14901961, a: 1}
     - _Shadows_Color: {r: 0.7137255, g: 0.4431373, b: 0.14901961, a: 0}
   m_BuildTextureStacks: []
