@@ -28,7 +28,7 @@ Material:
     m_Floats:
     - _Glow_Size: 0.1
     - _Highlight_Intensity: 0.1
-    - _Highlight_Size: -1
+    - _Highlight_Size: 0
     - _Outline_Size: 0.4
     - _Shadows_Contrast: 0.3
     m_Colors:
