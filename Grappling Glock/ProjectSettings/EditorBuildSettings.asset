@@ -5,9 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Old_Scripts/Prefabs/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Old_Scripts/Prefabs/Scenes/StartScrene.unity
+    guid: 39c4fa5cef238014b9c1e277ee6ee6eb
+  - enabled: 1
+    path: Assets/Old_Scripts/Prefabs/Scenes/DeathScene.unity
+    guid: a5c21a43ec786c14e8be4c9d55b7ee95
+  - enabled: 1
+    path: Assets/Old_Scripts/Prefabs/Scenes/Level_1.unity
+    guid: 7022fd37d98ec2d4ba9203cbeed3e8f7
+  - enabled: 1
+    path: Assets/Old_Scripts/Prefabs/Scenes/Level_2.unity
+    guid: db358c8b6b7500c45a22954cbfb682c8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

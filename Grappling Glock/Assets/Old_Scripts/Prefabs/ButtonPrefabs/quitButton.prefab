@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538809409321841279, guid: 624d2b86474541e42aaabf4b563b5bcd, type: 3}
+      - m_Target: {fileID: 6261540420101814789, guid: c81fa3f4804b2724bbff6d4501a749c2, type: 3}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
