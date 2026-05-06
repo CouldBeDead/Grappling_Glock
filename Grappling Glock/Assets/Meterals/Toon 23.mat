@@ -26,17 +26,17 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Glow_Size: 0
-    - _Highlight_Intensity: 0.18
-    - _Highlight_Size: 0.8
+    - _Glow_Size: 2
+    - _Highlight_Intensity: 10
+    - _Highlight_Size: 1
     - _Outline_Size: 0.5
     - _Shadows_Contrast: 0.19
     - _Shadows_Size: 0
     m_Colors:
-    - _Base_Color: {r: 0, g: 0.32516956, b: 1, a: 1}
-    - _Highlight_Color: {r: 0, g: 0.04092741, b: 1, a: 0}
+    - _Base_Color: {r: 0, g: 0.45463133, b: 1, a: 1}
+    - _Highlight_Color: {r: 0, g: 0.98317504, b: 1, a: 0}
     - _Outline_Color: {r: 0, g: 1, b: 1, a: 1}
-    - _Shadows_Color: {r: 0.5294118, g: 0.8078432, b: 0.9803922, a: 1}
+    - _Shadows_Color: {r: 0.5294118, g: 0.98039216, b: 0.97259885, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7523208459516627033
