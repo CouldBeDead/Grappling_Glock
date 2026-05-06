@@ -4624,7 +4624,7 @@ GameObject:
   - component: {fileID: 249718307}
   m_Layer: 0
   m_Name: TutoStrip_base(Lava Floor)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4756,7 +4756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98b3c91c81114e4da02c6e3582b79c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KillPlayerOnCollision
-  sceneName: Dead
+  sceneName: DeathScene
 --- !u!1 &255253250
 GameObject:
   m_ObjectHideFlags: 0

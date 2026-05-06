@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class KillPlayerOnCollision : MonoBehaviour
+public class LoadSceneOnPlayerCollision : MonoBehaviour
 {
-    public string sceneName = "Dead"; // The scene to load on collision
+    [Header("Player Reference")]
+    [SerializeField] private Transform playerCapsule;
 
-    void OnCollisionEnter(Collision collision)
+    [Header("Scene Settings")]
+    [SerializeField] private string sceneName = "Dead";
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.collider.transform == playerCapsule)
         {
             SceneManager.LoadScene(sceneName);
         }
