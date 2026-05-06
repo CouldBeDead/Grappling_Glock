@@ -3,19 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangerSpin : MonoBehaviour
 {
-    public string sceneToLoad = "NextScene"; // Name of the scene to load
-    public float rotationSpeed = 45f; // Degrees per second
+    [Header("Player Reference")]
+    [SerializeField] private Transform playerCapsule;
 
-    void Update()
+    [Header("Scene Settings")]
+    [SerializeField] private string sceneToLoad = "WiningRoom";
+
+    [Header("Spin Settings")]
+    [SerializeField] private float rotationSpeed = 45f;
+
+    private void Update()
     {
-        // Spin the object around its Y-axis
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Check if the player collided with this object
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.collider.transform == playerCapsule ||
+            collision.collider.transform.IsChildOf(playerCapsule))
         {
             SceneManager.LoadScene(sceneToLoad);
         }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,12 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private float aimAssistRadius = 1.5f;
     [SerializeField] private float aimAssistAngle = 8f;
 
+    [Header("Gun Spin Settings")]
+    [SerializeField] private Transform gunVisualToSpin;
+    [SerializeField] private float spinDuration = 0.4f;
+
+    private bool isGunSpinning = false;
+
     private SpringJoint joint;
 
     private bool isGrappling = false;
@@ -26,15 +33,27 @@ public class GrapplingGun : MonoBehaviour
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
+
+        if (gunVisualToSpin == null)
+        {
+            gunVisualToSpin = transform;
+        }
     }
 
     void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
     }
 
     void Update()
     {
+        Keyboard keyboard = Keyboard.current;
+
+        if (keyboard != null && keyboard.eKey.wasPressedThisFrame && !isGunSpinning)
+        {
+            StartCoroutine(SpinGun360());
+        }
+
         Mouse mouse = Mouse.current;
         if (mouse == null)
             return;
@@ -47,6 +66,30 @@ public class GrapplingGun : MonoBehaviour
         {
             StopGrapple();
         }
+    }
+
+    private IEnumerator SpinGun360()
+    {
+        isGunSpinning = true;
+
+        Quaternion startRotation = gunVisualToSpin.localRotation;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < spinDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float spinPercent = elapsedTime / spinDuration;
+            float spinAmount = spinPercent * 360f;
+
+            gunVisualToSpin.localRotation = startRotation * Quaternion.Euler(-spinAmount, 0f, 0f);
+            
+
+            yield return null;
+        }
+
+        gunVisualToSpin.localRotation = startRotation;
+        isGunSpinning = false;
     }
 
     void LateUpdate()
@@ -91,80 +134,73 @@ public class GrapplingGun : MonoBehaviour
 
         return false;
     }
+
     public bool TryGetAvailableGrapplePoint(out Vector3 point)
-{
-    RaycastHit hit;
-
-    // Direct enemy hit
-    if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
     {
-        point = hit.point;
-        return true;
-    }
+        RaycastHit hit;
 
-    // Direct grappleable hit
-    if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
-    {
-        point = hit.point;
-        return true;
-    }
-
-    // Aim assist enemy hit
-    if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsRed))
-    {
-        Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
-        float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
-
-        if (angleToTarget <= aimAssistAngle)
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsRed))
         {
             point = hit.point;
             return true;
         }
-    }
 
-    // Aim assist grappleable hit
-    if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
-    {
-        Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
-        float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
-
-        if (angleToTarget <= aimAssistAngle)
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
         {
             point = hit.point;
             return true;
         }
-    }
 
-    point = Vector3.zero;
-    return false;
-}
+        if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsRed))
+        {
+            Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
+            float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
+
+            if (angleToTarget <= aimAssistAngle)
+            {
+                point = hit.point;
+                return true;
+            }
+        }
+
+        if (Physics.SphereCast(playerCamera.position, aimAssistRadius, playerCamera.forward, out hit, maxDistance, whatIsGrappleable))
+        {
+            Vector3 directionToTarget = hit.collider.bounds.center - playerCamera.position;
+            float angleToTarget = Vector3.Angle(playerCamera.forward, directionToTarget);
+
+            if (angleToTarget <= aimAssistAngle)
+            {
+                point = hit.point;
+                return true;
+            }
+        }
+
+        point = Vector3.zero;
+        return false;
+    }
 
     void StartGrapple()
     {
         RaycastHit hit;
 
-        // Exact enemy hit gets priority
         if (TryDirectHit(whatIsRed, out hit))
         {
             EnemyGrapple(hit);
             return;
         }
 
-        // Exact ground/grappleable hit
         if (TryDirectHit(whatIsGrappleable, out hit))
         {
             GroundGrapple(hit);
             return;
         }
 
-        // Aim assist enemy hit
         if (TryAimAssistHit(whatIsRed, out hit))
         {
             EnemyGrapple(hit);
             return;
         }
 
-        // Aim assist grappleable hit
         if (TryAimAssistHit(whatIsGrappleable, out hit))
         {
             GroundGrapple(hit);
@@ -293,21 +329,6 @@ public class GrapplingGun : MonoBehaviour
             Destroy(joint);
             joint = null;
         }
-    }
-
-    void DrawRope()
-    {
-        if (joint == null)
-            return;
-
-        currentGrapplePosition = Vector3.Lerp(
-            currentGrapplePosition,
-            grapplePoint,
-            Time.deltaTime * 2f
-        );
-
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
     }
 
     public bool IsGrappling()
