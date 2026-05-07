@@ -5,7 +5,12 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 30f;
     public float lifetime = 3f;
+
+    [Header("Layer Masks")]
+    public LayerMask playerMask;
     public LayerMask breakMask;
+
+    [Header("Audio")]
     public AudioClip spawnSound;
 
     private AudioSource audioSource;
@@ -15,9 +20,6 @@ public class Bullet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-
-
-        // Apply pitch from TimeSlow
         if (audioSource != null && timeSlow != null)
         {
             if (spawnSound != null)
@@ -29,7 +31,6 @@ public class Bullet : MonoBehaviour
             audioSource.Play();
         }
 
-        // Auto-destroy after lifetime
         Destroy(gameObject, lifetime);
     }
 
@@ -40,29 +41,25 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject hitObject = collision.gameObject;
-
-        if (hitObject.CompareTag("Player"))
-        {
-            SceneManager.LoadScene("Dead");
-        }
-
-        if (((1 << hitObject.layer) & breakMask) != 0)
-        {
-            Destroy(gameObject);
-        }
+        HandleHit(collision.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject hitObject = other.gameObject;
+        HandleHit(other.gameObject);
+    }
 
-        if (hitObject.CompareTag("Player"))
+    private void HandleHit(GameObject hitObject)
+    {
+        int hitLayer = hitObject.layer;
+
+        if (((1 << hitLayer) & playerMask) != 0)
         {
             SceneManager.LoadScene("Dead");
+            return;
         }
 
-        if (((1 << hitObject.layer) & breakMask) != 0)
+        if (((1 << hitLayer) & breakMask) != 0)
         {
             Destroy(gameObject);
         }
