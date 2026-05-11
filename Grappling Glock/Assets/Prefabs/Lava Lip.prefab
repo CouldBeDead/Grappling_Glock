@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2651831849904555808}
   - component: {fileID: 7255096175216014878}
   - component: {fileID: 8256215120078026589}
-  - component: {fileID: 1402926793989672267}
+  - component: {fileID: -6351910274967492695}
   m_Layer: 0
   m_Name: Lava Lip
   m_TagString: Untagged
@@ -334,14 +334,14 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7677645069485410766}
   m_Mesh: {fileID: 0}
---- !u!65 &1402926793989672267
-BoxCollider:
+--- !u!64 &-6351910274967492695
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7677645069485410766}
-  m_Material: {fileID: 13400000, guid: 88ba4040e25febf41be5d31c27e498b9, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -352,6 +352,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 41.189514, y: 1.8852158, z: 0.8279821}
-  m_Center: {x: 52.99985, y: -5.6425557, z: 0.000004172326}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
