@@ -648,6 +648,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2183528478169072845, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_Name
       value: Office
@@ -715,8 +723,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7581133908131133464, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3417101748857775616}
   m_SourcePrefab: {fileID: 100100000, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
+--- !u!1 &3417101748857775615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7581133908131133464, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
+  m_PrefabInstance: {fileID: 3417101748857775614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3417101748857775616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417101748857775615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1c2824ee8c16943b35f348b6176791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneButton
+  sceneToLoad: Level_1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
