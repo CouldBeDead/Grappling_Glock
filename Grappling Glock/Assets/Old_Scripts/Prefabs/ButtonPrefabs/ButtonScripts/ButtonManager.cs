@@ -37,6 +37,13 @@ public class ButtonManager : MonoBehaviour
         menuButton.SetActive(true);
     }
 
+
+    public void RestartGame()
+    {
+        Debug.Log("Open the start scene again");
+        SceneManager.LoadScene("StartScrene"); 
+    }
+
     //Level button logic -- opens level scene 
     //public void LoadLevels()
     //{

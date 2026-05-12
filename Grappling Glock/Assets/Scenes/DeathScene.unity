@@ -741,19 +741,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: fc1c2824ee8c16943b35f348b6176791, type: 3}
+      objectReference: {fileID: 538809409321841279, guid: 624d2b86474541e42aaabf4b563b5bcd, type: 3}
     - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_name
+      value: StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEditor.MonoScript, UnityEditor.CoreModule
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 932761861492626372, guid: d413a77b5cca90b41a3f892059f94a12, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
