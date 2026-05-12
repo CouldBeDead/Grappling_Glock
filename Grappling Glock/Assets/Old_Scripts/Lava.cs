@@ -7,7 +7,7 @@ public class LoadSceneOnPlayerCollision : MonoBehaviour
     [SerializeField] private Transform playerCapsule;
 
     [Header("Scene Settings")]
-    [SerializeField] private string sceneName = "Dead";
+    [SerializeField] private string sceneName = "DeathScene";
 
     private void OnCollisionEnter(Collision collision)
     {

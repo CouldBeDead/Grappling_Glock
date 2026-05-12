@@ -11,7 +11,7 @@ public class ButtonManager : MonoBehaviour
    public void StartGame()
     {   
         Debug.Log("Start Game - Level1");
-        SceneManager.LoadScene("GameScene"); 
+        SceneManager.LoadScene("Level_1"); 
     }
 
     //quit button logic -- exits the game 
@@ -20,14 +20,6 @@ public class ButtonManager : MonoBehaviour
         Debug.Log("Quit Game - go back to menu");
         Application.Quit();
     }
-
-    //intro button logic -- opens intro scene 
-    public void LoadIntro()
-    {
-        Debug.Log("Load Intr0 - go to intro scene");
-        SceneManager.LoadScene("IntroScene");
-    }
-
 
     //menu Button logic -- opens the menu dropdown Canvas
     public void OpenMenuCanvasDropDown()
@@ -46,9 +38,9 @@ public class ButtonManager : MonoBehaviour
     }
 
     //Level button logic -- opens level scene 
-    public void LoadLevels()
-    {
-        Debug.Log("Load Levels - go to level scene");
-        SceneManager.LoadScene("LevelScene");
-    }
+    //public void LoadLevels()
+    //{
+    //    Debug.Log("Load Levels - go to level scene");
+    //    SceneManager.LoadScene("LevelScene");
+    //}
 }
