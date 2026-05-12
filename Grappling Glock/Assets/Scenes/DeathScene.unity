@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.98
@@ -320,6 +324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1082,6 +1090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.12
@@ -1429,6 +1441,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.334041
@@ -1707,6 +1723,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.116528
@@ -1893,6 +1913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBoi
       objectReference: {fileID: 0}
+    - target: {fileID: 5718777194377889581, guid: bef963c892211f54a90bddb260d08a51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe6b24024c3b60f4087c1c03e714f081, type: 2}
     - target: {fileID: 6499236502511223507, guid: bef963c892211f54a90bddb260d08a51, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.782496
