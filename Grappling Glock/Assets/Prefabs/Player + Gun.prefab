@@ -236,7 +236,7 @@ MonoBehaviour:
   slideForce: 10
   slideCounterMovement: 1
   jumpForce: 400
-  slideAudio: {fileID: 0}
+  slideAudio: {fileID: 6353650731106628758}
   maxSlideVolume: 1.5
   minSpeedForAudio: 0.1
 --- !u!54 &578212559522441981
@@ -435,6 +435,8 @@ MonoBehaviour:
   maxDistance: 50
   aimAssistRadius: 10
   aimAssistAngle: 10
+  gunVisualToSpin: {fileID: 0}
+  spinDuration: 0.4
 --- !u!1 &1691526138839887042
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +480,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: b59016221ea70674d99b294a35e21e3f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -59,15 +59,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5334834822127654028, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.001
+      value: 0.047
       objectReference: {fileID: 0}
     - target: {fileID: 5334834822127654028, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.123
+      value: 0.455
       objectReference: {fileID: 0}
     - target: {fileID: 5334834822127654028, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.191
       objectReference: {fileID: 0}
     - target: {fileID: 5334834822127654028, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 6960599328523027806, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a3a530523bec0cc41aed4f3a4d9da936, type: 2}
+      objectReference: {fileID: 2100000, guid: 717e52dd9491caa438a6686456c370a3, type: 2}
     - target: {fileID: 7386557202694348142, guid: 2fbb1d7703ebac449a90e9336c7a9a7f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -146,8 +146,8 @@ SphereCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7
-  m_Center: {x: -0.012617062, y: 0.13427338, z: -0.0000005558722}
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2758574625130251770
 MonoBehaviour:
   m_ObjectHideFlags: 0
